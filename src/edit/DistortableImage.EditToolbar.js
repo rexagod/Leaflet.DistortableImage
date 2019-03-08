@@ -8,123 +8,38 @@ var EditOverlayAction = LeafletToolbar.ToolbarAction.extend({
       LeafletToolbar.ToolbarAction.prototype.initialize.call(this, options);
     }
   }),
-
-  ToggleTransparency = EditOverlayAction.extend({
+  Stitcher = EditOverlayAction.extend({
     options: {
       toolbarIcon: {
-        html: '<span class="fa fa-adjust"></span>',
-        tooltip: "Toggle Image Transparency",
-        title: "Toggle Image Transparency"
+        html: '<span class="fa fa-puzzle-piece"></span>',
+        tooltip: "Enable stitcher",
+        title: "Enable stitcher"
       }
     },
 
     addHooks: function() {
-      var editing = this._overlay.editing;
-
-      editing._toggleTransparency();
-      this.disable();
-    }
-  }),
-
-  ToggleOutline = EditOverlayAction.extend({
-    options: {
-      toolbarIcon: {
-        html: '<span class="fa fa-square-o"></span>',
-        tooltip: "Toggle Image Outline",
-        title: "Toggle Image Outline"
-      }
-    },
-
-    addHooks: function() {
-      var editing = this._overlay.editing;
-
-      editing._toggleOutline();
-      this.disable();
-    }
-  }),
-
-  RemoveOverlay = EditOverlayAction.extend({
-    options: {
-      toolbarIcon: {
-        html: '<span class="fa fa-trash"></span>',
-        tooltip: "Delete image",
-        title: "Delete image"
-      }
-    },
-
-    addHooks: function() {
+      var overlay = this._overlay;
       var map = this._map;
 
-      map.removeLayer(this._overlay);
-      this._overlay.fire("delete");
-      this.disable();
-    }
-  }),
+      overlay._corners = [
+        new L.latLng(51.511092905004745, -0.05982398986816407),
+        new L.latLng(51.511092905004745, -0.09999275207519533),
+        new L.latLng(51.49100336416198, -0.05982398986816407),
+        new L.latLng(51.49100336416198, -0.09999275207519533)
+      ];
 
-  ToggleEditable = EditOverlayAction.extend({
-    options: {
-      toolbarIcon: {
-        html: '<span class="fa fa-lock"></span>',
-        tooltip: "Lock / Unlock editing",
-        title: "Lock / Unlock editing"
+      var corners = overlay._corners;
+
+      for (var i = 0; i < corners.length; i++) {
+        map.project(corners[i]);
       }
-    },
 
-    addHooks: function() {
-      var editing = this._overlay.editing;
-
-      editing._toggleLock();
-      this.disable();
-    }
-  }),
-
-  ToggleRotateDistort = EditOverlayAction.extend({
-    initialize: function(map, overlay, options) {
-      var icon = overlay.editing._mode === "rotate" ? "image" : "rotate-left";
-
-      options = options || {};
-      options.toolbarIcon = {
-        html: '<span class="fa fa-' + icon + '"></span>',
-        tooltip: "Rotate",
-        title: "Rotate"
-      };
-
-      EditOverlayAction.prototype.initialize.call(this, map, overlay, options);
-    },
-
-    addHooks: function() {
-      var editing = this._overlay.editing;
-
-      editing._toggleRotateDistort();
-      this.disable();
-    }
-  }),
-
-  ToggleExport = EditOverlayAction.extend({
-    options: {
-      toolbarIcon: {
-        html: '<span class="fa fa-download"></span>',
-        tooltip: "Export Image",
-        title: "Export Image"
-      }
-    },
-
-    addHooks: function() {
-      var editing = this._overlay.editing;
-
-      editing._toggleExport();
+      map.setView(overlay._corners[0], 12);
       this.disable();
     }
   });
 
-var defaults = [
-  ToggleTransparency,
-  RemoveOverlay,
-  ToggleOutline,
-  ToggleEditable,
-  ToggleRotateDistort,
-  ToggleExport
-];
+var defaults = [Stitcher];
 
 L.DistortableImage.EditToolbarDefaults = defaults;
 
