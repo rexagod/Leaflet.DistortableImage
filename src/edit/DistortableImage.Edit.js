@@ -1,4 +1,5 @@
 L.DistortableImage = L.DistortableImage || {};
+var Tracer = L.DistortableImage.Tracer = L.DistortableImage.Tracer || {};
 
 L.DistortableImage.Edit = L.Handler.extend({
   options: {
@@ -32,7 +33,12 @@ L.DistortableImage.Edit = L.Handler.extend({
   addHooks: function() {
     var overlay = this._overlay,
       map = overlay._map,
-      i; console.log(overlay._corners);
+      i; console.log("/ ",overlay._corners);
+
+      console.log(Tracer);
+      overlay.Tracer = Tracer;
+      Tracer = overlay._corners;
+      console.log(Tracer);
 
     /* bring the selected image into view */
     overlay.bringToFront();

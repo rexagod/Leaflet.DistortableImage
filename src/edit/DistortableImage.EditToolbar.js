@@ -21,12 +21,17 @@ var EditOverlayAction = LeafletToolbar.ToolbarAction.extend({
       var overlay = this._overlay;
       var map = this._map;
 
-      overlay._corners = [
-        new L.latLng(51.511092905004745, -0.05982398986816407),
-        new L.latLng(51.511092905004745, -0.09999275207519533),
-        new L.latLng(51.49100336416198, -0.05982398986816407),
-        new L.latLng(51.49100336416198, -0.09999275207519533)
-      ];
+      if (overlay.Tracer) {
+        overlay._corners = overlay.Tracer;
+      }
+
+      // For the "Road-connection" example
+      // overlay._corners = [
+      //   new L.latLng(51.511092905004745, -0.05982398986816407),
+      //   new L.latLng(51.511092905004745, -0.09999275207519533),
+      //   new L.latLng(51.49100336416198, -0.05982398986816407),
+      //   new L.latLng(51.49100336416198, -0.09999275207519533)
+      // ];
 
       var corners = overlay._corners;
 
