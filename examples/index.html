@@ -64,7 +64,7 @@
     var map;
 
     (function() {
-      // basic Leaflet map setup
+      
       map = L.map("map").setView([51.505, -0.09], 13);
       L.tileLayer(
         "https://{s}.tiles.mapbox.com/v3/anishshah101.ipm9j6em/{z}/{x}/{y}.png",
@@ -78,12 +78,9 @@
         }
       ).addTo(map);
 
-      // create an image
       img = L.distortableImageOverlay("example.png", {
         // add a suppressToolbar: 'true' here to disable toolbars
         // add a toolbarType field with values 'popup' (default) or 'control'
-        // add a keymapper: false <== hides the keymapper
-        // add a keymapper_position field with combinations of 'top', 'bottom', 'left' or 'right'
         corners: [
           new L.latLng(51.52, -0.1),
           new L.latLng(51.52, -0.14),
@@ -92,13 +89,14 @@
         ],
         fullResolutionSrc: "large.jpg"
       }).addTo(map);
-
+      
+      keymapper = new L.DistortableImage.Keymapper(map,img._image);
+      
       /* add custom icon functionality */
       // refer this snippet below inorder to add a custom functionality
-
       //  var tool = EditOverlayAction.extend({
-      //    options: {
-      //      toolbarIcon: {
+        //    options: {
+          //      toolbarIcon: {
       //        html: '<span class="fa fa-plus-circle"></span>',
       //        tooltip: "Print a console message!",
       //        title: "Console logger"
@@ -115,6 +113,9 @@
       // img._addTool(tool);
 
       L.DomEvent.on(img._image, "load", img.editing.enable, img.editing);
+      L.Map.addInitHook('addHandler', 'keymapper', keymapper);
+      keymapper.enable();
+      // can be disabled using keymapper.disable();
     })();
   </script>
 </html>

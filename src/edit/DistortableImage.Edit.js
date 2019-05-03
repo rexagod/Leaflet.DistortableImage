@@ -38,15 +38,9 @@ L.DistortableImage.Edit = L.Handler.extend({
 
 	/* Run on image selection. */
 	addHooks: function() {
-		var overlay = this._overlay,
-			map = overlay._map,
-			keymapper_position,i;
-
-    /* instantiate and render keymapper for one instance only*/
-    if (this.instance_count === 1 && overlay.options.keymapper !== false) {
-      keymapper_position = overlay.options.keymapper_position || 'topright';
-      map.addControl(new L.DistortableImage.Keymapper({position: keymapper_position}));
-    }
+    var overlay = this._overlay,
+    map = overlay._map,
+    i;
 
 		/* bring the selected image into view */
 		overlay.bringToFront();

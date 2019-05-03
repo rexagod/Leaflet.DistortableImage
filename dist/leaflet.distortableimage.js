@@ -1133,13 +1133,24 @@ L.Map.addInitHook('addHandler', 'boxSelector', L.Map.BoxSelectHandle);
 L.DomUtil = L.DomUtil || {};
 L.DistortableImage = L.DistortableImage || {};
 
-L.DistortableImage.Keymapper = L.Control.extend({
-    initialize: function(options) {
-        L.Control.prototype.initialize.call(this, options);
+L.DistortableImage.Keymapper = L.Handler.extend({
+    initialize: function(map, image, params) {
+        this._map = map;
+        this._image = image;
+        this._params = params || {};
+        this._position = this._params.position || 'topright';
     },
-    onAdd: function() {
-        var el_wrapper = L.DomUtil.create("div", "l-container");
-        el_wrapper.innerHTML = "<table><tbody>" +
+    addHooks: function() {
+        L.DomEvent.on(this._image, "load", this._setMapper, this);
+    },
+    removeHooks: function() {
+        L.DomEvent.off(this._image, "load", this._setMapper, this);
+    },
+    _setMapper: function() {
+        var keymapper = L.control({position: this._position});
+        keymapper.onAdd = function() {
+            var el_wrapper = L.DomUtil.create("div", "l-container");
+            el_wrapper.innerHTML = "<table><tbody>" +
             "<tr><th>Keymappings</th></tr>" +
             "<tr><td><kbd>j</kbd>, <kbd>k</kbd>: <span>Send up / down (stacking order)</span></td></tr>" +
             "<tr><td><kbd>l</kbd>: <span>Lock</span></td></tr>" +
@@ -1151,7 +1162,9 @@ L.DistortableImage.Keymapper = L.Control.extend({
             "<tr><td><kbd>delete</kbd> , <kbd>backspace</kbd>: <span>Delete</span></td></tr>" +
             "<tr><td><kbd>caps</kbd>: <span>Rotate</span></td></tr>" +
             "</tbody></table>";
-        return el_wrapper;
+            return el_wrapper;
+        };
+        keymapper.addTo(this._map);
     }
 });
 L.DistortableImage = L.DistortableImage || {};
@@ -1401,15 +1414,9 @@ L.DistortableImage.Edit = L.Handler.extend({
 
 	/* Run on image selection. */
 	addHooks: function() {
-		var overlay = this._overlay,
-			map = overlay._map,
-			keymapper_position,i;
-
-    /* instantiate and render keymapper for one instance only*/
-    if (this.instance_count === 1 && overlay.options.keymapper !== false) {
-      keymapper_position = overlay.options.keymapper_position || 'topright';
-      map.addControl(new L.DistortableImage.Keymapper({position: keymapper_position}));
-    }
+    var overlay = this._overlay,
+    map = overlay._map,
+    i;
 
 		/* bring the selected image into view */
 		overlay.bringToFront();
