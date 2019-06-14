@@ -48,7 +48,9 @@
 
 <script>
 
-  paths = ['../node_modules/matcher-core/assets/resources/big.jpg', '../node_modules/matcher-core/assets/resources/small.jpg'];
+  // check if there's a way to globally specify base path? 🤔
+  // absolute indexing for gh-pages support only
+  paths = ['/Leaflet.DistortableImage/node_modules/matcher-core/assets/resources/big.jpg', '/Leaflet.DistortableImage/node_modules/matcher-core/assets/resources/small.jpg'];
 
   function add() {
     var map = L.map("map").setView([51.505, -0.09], 12);
