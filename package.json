@@ -29,7 +29,9 @@
   },
   "homepage": "https://github.com/publiclab/Leaflet.DistortableImage",
   "dependencies": {
-    "grunt-cli": "^1.2.0"
+    "grunt-cli": "^1.2.0",
+    "grunt-svg-sprite": "^1.5.0",
+    "grunt-svgmin": "^6.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

@@ -1,5 +1,5 @@
 #imgcontainer {
-  position:relative;
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: clip;
@@ -17,12 +17,13 @@
 
 .corner {
   position: absolute;
-  top: -10px; left: -10px;
+  top: -10px;
+  left: -10px;
 }
 
 #inputimage {
-  position:absolute;
-  top:-100px;
+  position: absolute;
+  top: -100px;
 }
 
 .leaflet-pane .leaflet-overlay-pane img {
@@ -51,7 +52,7 @@ img.leaflet-image-layer.selected {
   line-height: 1.2;
 }
 
-.l-container table th{
+.l-container table th {
   font-size: 16px;
   padding-top: 8px;
 }
@@ -73,14 +74,15 @@ kbd {
   font-weight: 500;
   padding: 0.2rem 0.4rem;
   font-size: 95%;
-  color: black; 
+  color: black;
   background-color: rgb(247, 247, 247);
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
   -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
   text-shadow: 0 0.5px 0 #fff;
 }
 
@@ -91,7 +93,7 @@ span {
 
 #close-keymapper-button {
   border: none;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   outline: none;
   position: absolute;
   top: 0;
@@ -111,4 +113,15 @@ span {
 
 #keymapper-hr {
   padding-top: 0px;
+}
+
+#minimized-button {
+  z-index: 1000;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
 }
