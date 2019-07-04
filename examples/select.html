@@ -98,12 +98,9 @@
       }, this);
 
       /* instantiate and enable keymapper */
-      keymapper1 = new L.DistortableImage.Keymapper(map, img._image);
-      keymapper2 = new L.DistortableImage.Keymapper(map, img._image);
-      L.Map.addInitHook('addHandler', 'keymapper', keymapper1);
-      L.Map.addInitHook('addHandler', 'keymapper', keymapper2);
-      keymapper1.enable();
-      keymapper2.enable();
+      keymapper = new L.DistortableImage.Keymapper(map, img._image);
+      L.Map.addInitHook('addHandler', 'keymapper', keymapper);
+      keymapper.enable();
       // can be disabled using keymapper.disable();      
     })();
 
