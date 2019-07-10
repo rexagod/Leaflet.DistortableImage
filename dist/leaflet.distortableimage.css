@@ -118,8 +118,8 @@ span {
 #minimized-button {
   z-index: 1000;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 15px;
   background: white;
   border-radius: 5px;
   border: none;
