@@ -1,3 +1,9 @@
+svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
 #imgcontainer {
   position: relative;
   width: 100%;
@@ -86,6 +92,7 @@ kbd {
   text-shadow: 0 0.5px 0 #fff;
 }
 
+<<<<<<< HEAD
 span {
   margin-left: 2px;
   letter-spacing: 1.2px;
@@ -125,3 +132,5 @@ span {
   border: none;
   font-size: 20px;
 }
+=======
+>>>>>>> 70b22a2ff4e5b7f0c939ea70340746bbade161cc
